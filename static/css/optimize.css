@@ -1,0 +1,48 @@
+/* Performance optimizations */
+
+/* Reduce animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Optimize font loading */
+@font-face {
+    font-display: swap;
+}
+
+/* Optimize rendering performance */
+.data-table {
+    will-change: auto;
+}
+
+.chart-container {
+    contain: layout style paint;
+}
+
+/* Reduce repaints on scroll */
+.header {
+    will-change: transform;
+}
+
+/* Optimize images */
+img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Reduce layout shifts */
+.profile-photo {
+    aspect-ratio: 1 / 1;
+}
+
+/* Optimize SVG rendering */
+svg {
+    shape-rendering: geometricPrecision;
+}
+

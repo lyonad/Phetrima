@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compare ARIMA and Prophet forecasting models for global GDP prediction across 117 countries (2000-2025)">
+    <meta name="keywords" content="GDP forecasting, ARIMA, Prophet, time series, economic prediction, data science">
+    <meta name="author" content="Lyon Ambrosio Djuanda">
+    <meta property="og:title" content="Phetrima - GDP Forecasting Platform">
+    <meta property="og:description" content="Compare Prophet and ARIMA models for global GDP forecasting">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
+    <link rel="alternate icon" href="{{ url_for('static', filename='img/favicon.svg') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/favicon.svg') }}">
+    <title>Phetrima - GDP Forecasting with ARIMA vs Prophet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/optimize.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <rect width="40" height="40" rx="8" fill="url(#gradient)"/>
+                        <path d="M10 25L15 18L20 22L25 12L30 16" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="#2b4257"/>
+                                <stop offset="100%" stop-color="#14202e"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div>
+                        <h1>Phetrima</h1>
+                        <p class="subtitle">Prophet + ARIMA Forecasting Platform</p>
+                    </div>
+                </div>
+                <nav class="nav-tabs">
+                    <button class="nav-tab active" data-section="hero">Home</button>
+                    <button class="nav-tab" data-section="overview">Overview</button>
+                    <button class="nav-tab" data-section="countries">By Country</button>
+                    <button class="nav-tab" data-section="continents">By Continent</button>
+                    <button class="nav-tab" data-section="forecast">Forecast Detail</button>
+                    <button class="nav-tab" data-section="insights">Insights</button>
+                    <button class="nav-tab" data-section="about">About</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            
+            <!-- Hero Section -->
+            <section id="hero-section" class="section active">
+                <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge">Phetrima Project</div>
+                    <h1 class="hero-title">Global GDP Forecasting with AI Models</h1>
+                    <p class="hero-subtitle">Comparing Prophet and ARIMA forecasting models across 117 countries using World Bank data from 2000-2025</p>
+                    
+                    <!-- Hero Buttons -->
+                    <div class="hero-buttons">
+                        <button class="btn-primary btn-hero" onclick="navigateToSection('overview')">View Overview</button>
+                        <button class="btn-secondary btn-hero" onclick="navigateToSection('countries')">Explore By Country</button>
+                    </div>
+                    
+                    <div class="hero-stats">
+                            <div class="hero-stat">
+                                <div class="hero-stat-number">117</div>
+                                <div class="hero-stat-label">Countries Analyzed</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-number">25</div>
+                                <div class="hero-stat-label">Years of Data</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-number">2</div>
+                                <div class="hero-stat-label">AI Models</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-number">72</div>
+                                <div class="hero-stat-label">Prophet Wins</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- What is Phetrima -->
+                <div class="content-section">
+                    <h2>What is Phetrima?</h2>
+                    <p>Phetrima is a comprehensive forecasting research platform that evaluates two powerful time series forecasting models: Prophet and ARIMA. This project analyzes economic growth patterns across 117 countries to determine which model provides better GDP predictions.</p>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>🎯 The Goal</h3>
+                            <p>Compare the predictive accuracy of Prophet (Facebook's forecasting tool) and ARIMA (AutoRegressive Integrated Moving Average) models for forecasting GDP across different countries and continents.</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>📊 The Data</h3>
+                            <p>We use annual GDP data from the World Bank spanning 25 years (2000-2025) for 117 countries. The training period is 2000-2021, and we test predictions on 2022-2025.</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>🔬 The Method</h3>
+                            <p>Each model generates GDP forecasts for each country, and we measure accuracy using three metrics: MAE, RMSE, and MAPE. The model with lower errors wins for that country.</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>🏆 The Results</h3>
+                            <p>Prophet performs better in 72 countries (61.5%), while ARIMA excels in 45 countries (38.5%). Prophet particularly shines in developing economies with non-linear growth patterns.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Terms Explained -->
+                <div class="content-section">
+                    <h2>Understanding the Technical Terms</h2>
+                    
+                    <div class="glossary">
+                        <div class="glossary-item">
+                            <h3>ARIMA (AutoRegressive Integrated Moving Average)</h3>
+                            <p><strong>What it means:</strong> ARIMA is a classical statistical model used for time series forecasting.</p>
+                            <ul>
+                                <li><strong>AutoRegressive (AR):</strong> Uses past values to predict future values</li>
+                                <li><strong>Integrated (I):</strong> Handles trends in data by taking differences</li>
+                                <li><strong>Moving Average (MA):</strong> Smooths out random fluctuations</li>
+                            </ul>
+                            <p><strong>In simple terms:</strong> ARIMA finds patterns in past GDP data to predict future GDP. It works best when data has clear, consistent patterns over time.</p>
+                        </div>
+
+                        <div class="glossary-item">
+                            <h3>Prophet</h3>
+                            <p><strong>What it means:</strong> Prophet is Facebook's open-source forecasting tool designed to handle time series data with seasonal patterns and trends.</p>
+                            <ul>
+                                <li><strong>Trend Component:</strong> Captures long-term direction of GDP (growing, declining)</li>
+                                <li><strong>Seasonality:</strong> Identifies recurring patterns (though not relevant for annual GDP)</li>
+                                <li><strong>Changepoints:</strong> Automatically detects major shifts in trends</li>
+                            </ul>
+                            <p><strong>In simple terms:</strong> Prophet is like a smart trend detector. It excels at catching sudden changes in economic growth, like the post-COVID recovery. It's particularly good for developing countries with rapid economic changes.</p>
+                        </div>
+
+                        <div class="glossary-item">
+                            <h3>MAE (Mean Absolute Error)</h3>
+                            <p><strong>What it measures:</strong> The average difference between predicted GDP and actual GDP.</p>
+                            <p><strong>Example:</strong> If Prophet predicts a country's GDP at $100 billion but it's actually $110 billion, the error is $10 billion. We calculate this for all forecast years and take the average.</p>
+                            <p><strong>Lower is better:</strong> A smaller MAE means the model's predictions are closer to reality.</p>
+                        </div>
+
+                        <div class="glossary-item">
+                            <h3>RMSE (Root Mean Square Error)</h3>
+                            <p><strong>What it measures:</strong> Similar to MAE but penalizes larger errors more heavily.</p>
+                            <p><strong>Why it matters:</strong> If one model has a few very bad predictions, RMSE will highlight this more than MAE would.</p>
+                            <p><strong>Lower is better:</strong> Indicates the model avoids large prediction mistakes.</p>
+                        </div>
+
+                        <div class="glossary-item">
+                            <h3>MAPE (Mean Absolute Percentage Error)</h3>
+                            <p><strong>What it measures:</strong> The error as a percentage of the actual value.</p>
+                            <p><strong>Example:</strong> If actual GDP is $100 billion and we predicted $110 billion, the MAPE is 10%.</p>
+                            <p><strong>Why it's useful:</strong> Allows us to compare accuracy across countries of different sizes. A $10 billion error for the USA (tiny GDP) is less significant than for a small country.</p>
+                            <p><strong>Lower is better:</strong> Lower percentage means more accurate predictions relative to the country's GDP size.</p>
+                        </div>
+
+                        <div class="glossary-item">
+                            <h3>GDP (Gross Domestic Product)</h3>
+                            <p><strong>What it is:</strong> The total value of all goods and services produced in a country in a year.</p>
+                            <p><strong>Why it matters:</strong> GDP is the most important indicator of economic health. Predicting future GDP helps governments plan budgets, businesses make investment decisions, and economists understand growth trends.</p>
+                            <p><strong>In this study:</strong> We're trying to predict each country's annual GDP for years 2022-2025 using data from 2000-2021.</p>
+                        </div>
+
+                        <div class="glossary-item">
+                            <h3>SARIMAX</h3>
+                            <p><strong>What it means:</strong> Seasonal ARIMA with eXogenous variables - an advanced version of ARIMA used in our study.</p>
+                            <p><strong>In practice:</strong> We use SARIMAX for ARIMA modeling, though we focus on non-seasonal patterns since GDP is annual data.</p>
+                            <p><strong>Grid Search:</strong> The model tests many different parameter combinations (called "orders") to find the best fit for each country's data.</p>
+                        </div>
+
+                        <div class="glossary-item">
+                            <h3>Changepoints</h3>
+                            <p><strong>What they are:</strong> Points in time where the trend changes direction or speed significantly.</p>
+                            <p><strong>Example:</strong> COVID-19 was a major changepoint - GDP dropped dramatically in 2020 for most countries. Prophet automatically detects these.</p>
+                            <p><strong>Why it matters:</strong> For countries with rapid economic changes (like China or India), changepoints are crucial for accurate forecasting.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How It Works -->
+                <div class="content-section">
+                    <h2>How Phetrima Works</h2>
+                    
+                    <div class="process-flow">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Data Collection</h3>
+                                <p>Gather annual GDP data from the World Bank for 117 countries spanning 2000-2025</p>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Data Split</h3>
+                                <p>Separate data into training (2000-2021) and testing (2022-2025) periods</p>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Model Training</h3>
+                                <p>Train both ARIMA and Prophet models on historical data (2000-2021) to learn patterns</p>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Forecasting</h3>
+                                <p>Each model predicts GDP for 2022-2025 based on patterns learned from training data</p>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h3>Comparison</h3>
+                                <p>Compare predictions to actual GDP values and calculate errors (MAE, RMSE, MAPE)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <h3>Results</h3>
+                                <p>Determine which model performed better for each country and generate insights</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Findings Summary -->
+                <div class="content-section">
+                    <h2>Key Findings at a Glance</h2>
+                    
+                    <div class="findings-grid">
+                        <div class="finding-card highlight">
+                            <h3>Prophet Dominates Globally</h3>
+                            <p>Prophet wins in 72 out of 117 countries (61.5%), showing superior performance in most economies worldwide.</p>
+                        </div>
+                        
+                        <div class="finding-card highlight">
+                            <h3>Lower Errors Across Metrics</h3>
+                            <p>Prophet achieves lower MAE (76.0B vs 101.4B), lower RMSE (80.6B vs 106.8B), and lower MAPE (11.4% vs 13.6%) compared to ARIMA.</p>
+                        </div>
+                        
+                        <div class="finding-card highlight">
+                            <h3>Best for Developing Economies</h3>
+                            <p>Prophet excels in Asia, Africa, and rapidly growing economies with non-linear growth patterns (China, India, Indonesia).</p>
+                        </div>
+                        
+                        <div class="finding-card success">
+                            <h3>ARIMA Holds Its Own</h3>
+                            <p>ARIMA performs better in stable, mature economies like the USA, Japan, and France where patterns are consistent.</p>
+                        </div>
+                        
+                        <div class="finding-card success">
+                            <h3>Regional Patterns Matter</h3>
+                            <p>Asia shows massive Prophet advantage (77% improvement), while North America is more competitive due to USA's scale.</p>
+                        </div>
+                        
+                        <div class="finding-card success">
+                            <h3>Context Is Key</h3>
+                            <p>The best model depends on country characteristics: volatility, trend patterns, data quality, and economic stability.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="cta-section">
+                    <h2>Explore the Results</h2>
+                    <p>Dive deep into our analysis by browsing through different sections of this dashboard</p>
+                    <div class="cta-buttons">
+                        <button class="btn-primary" onclick="navigateToSection('overview')">View Overview</button>
+                        <button class="btn-secondary" onclick="navigateToSection('countries')">Explore by Country</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Overview Section -->
+            <section id="overview-section" class="section">
+                <div class="section-header">
+                    <h2>Executive Summary</h2>
+                    <p>Comparison of ARIMA and Prophet model performance across 117 countries</p>
+                </div>
+
+                <!-- Key Metrics Cards -->
+                <div class="metrics-grid">
+                    <div class="metric-card prophet">
+                        <div class="metric-icon"></div>
+                        <div class="metric-content">
+                            <h3>Prophet</h3>
+                            <div class="metric-value" id="prophet-mae">-</div>
+                            <div class="metric-label">MAE (Billion USD)</div>
+                            <div class="metric-secondary">
+                                <span>RMSE: <strong id="prophet-rmse">-</strong></span>
+                                <span>MAPE: <strong id="prophet-mape">-</strong>%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card arima">
+                        <div class="metric-icon"></div>
+                        <div class="metric-content">
+                            <h3>ARIMA</h3>
+                            <div class="metric-value" id="arima-mae">-</div>
+                            <div class="metric-label">MAE (Billion USD)</div>
+                            <div class="metric-secondary">
+                                <span>RMSE: <strong id="arima-rmse">-</strong></span>
+                                <span>MAPE: <strong id="arima-mape">-</strong>%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card wins">
+                        <div class="metric-icon"></div>
+                        <div class="metric-content">
+                            <h3>Best Model</h3>
+                            <div class="wins-chart-container">
+                                <canvas id="winsChart"></canvas>
+                            </div>
+                            <div class="wins-labels">
+                                <span class="win-label prophet-win">Prophet: <strong id="prophet-wins">-</strong></span>
+                                <span class="win-label arima-win">ARIMA: <strong id="arima-wins">-</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="charts-row">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Global Performance by Metrics</h3>
+                            <p>Comparison of MAE, RMSE, and MAPE</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="globalMetricsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Top 10 Countries with Biggest Improvements</h3>
+                            <p>MAE improvement using Prophet</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="improvementsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Countries Table -->
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Top 10 Largest Economies</h3>
+                        <p>Based on latest GDP</p>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table" id="topCountriesTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Country</th>
+                                    <th>Continent</th>
+                                    <th>GDP (Trillion USD)</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Countries Section -->
+            <section id="countries-section" class="section">
+                <div class="section-header">
+                    <h2>Country-by-Country Analysis</h2>
+                    <p>Detailed model performance for each country</p>
+                </div>
+
+                <!-- Filters -->
+                <div class="filters-bar">
+                    <div class="filter-group">
+                        <label for="continentFilter">Filter by Continent:</label>
+                        <select id="continentFilter" class="filter-select">
+                            <option value="">All Continents</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="winnerFilter">Filter by Model:</label>
+                        <select id="winnerFilter" class="filter-select">
+                            <option value="">All Models</option>
+                            <option value="Prophet">Prophet Wins</option>
+                            <option value="ARIMA">ARIMA Wins</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="searchCountry">Search Country:</label>
+                        <input type="text" id="searchCountry" class="filter-input" placeholder="Type country name...">
+                    </div>
+                </div>
+
+                <!-- Countries Table -->
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Model Performance by Country</h3>
+                        <div class="table-actions">
+                            <button class="btn-secondary" id="exportBtn">Export CSV</button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table sortable" id="countriesTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th data-sort="country">Country</th>
+                                    <th data-sort="continent">Continent</th>
+                                    <th data-sort="arima_mae">ARIMA MAE (B)</th>
+                                    <th data-sort="arima_mape">ARIMA MAPE (%)</th>
+                                    <th data-sort="prophet_mae">Prophet MAE (B)</th>
+                                    <th data-sort="prophet_mape">Prophet MAPE (%)</th>
+                                    <th data-sort="winner">Best Model</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="table-info">
+                        <span id="tableInfo">Showing <strong id="displayedRows">0</strong> of <strong id="totalRows">0</strong> countries</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Continents Section -->
+            <section id="continents-section" class="section">
+                <div class="section-header">
+                    <h2>Continent-by-Continent Analysis</h2>
+                    <p>Model performance aggregated by continent</p>
+                </div>
+
+                <!-- Continent Chart -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>RMSE Comparison by Continent</h3>
+                        <p>ARIMA vs Prophet (Billion USD)</p>
+                    </div>
+                    <div class="chart-container" style="height: 400px;">
+                        <canvas id="continentChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Continent Stats Cards -->
+                <div class="continent-stats-grid" id="continentStatsGrid"></div>
+
+                <!-- Continent Table -->
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Detailed Metrics by Continent</h3>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table" id="continentTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Continent</th>
+                                    <th>ARIMA MAE (B)</th>
+                                    <th>ARIMA RMSE (B)</th>
+                                    <th>ARIMA MAPE (%)</th>
+                                    <th>Prophet MAE (B)</th>
+                                    <th>Prophet RMSE (B)</th>
+                                    <th>Prophet MAPE (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Forecast Detail Section -->
+            <section id="forecast-section" class="section">
+                <div class="section-header">
+                    <h2>Country Forecast Detail</h2>
+                    <p>GDP time series visualization comparing ARIMA vs Prophet</p>
+                </div>
+
+                <!-- Country Selector -->
+                <div class="filters-bar" style="margin-bottom: 3rem;">
+                    <div class="filter-group" style="flex: 2;">
+                        <label for="countrySelector">Select Country:</label>
+                        <select id="countrySelector" class="filter-select">
+                            <option value="">-- Select Country --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Forecast Chart -->
+                <div class="chart-card" id="forecastChartCard" style="display: none;">
+                    <div class="chart-header">
+                        <h3 id="forecastChartTitle">ARIMA vs Prophet Forecast Comparison</h3>
+                        <p id="forecastChartSubtitle">GDP Historical vs Forecasted</p>
+                    </div>
+                    <div class="chart-container" style="height: 500px;">
+                        <canvas id="forecastChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Winner Summary -->
+                <div class="metrics-grid" id="forecastWinnerSummary" style="display: none; margin-top: 2rem;">
+                    <div class="metric-card arima" id="arimaScoreCard">
+                        <div class="metric-icon"></div>
+                        <div class="metric-content">
+                            <h3>ARIMA</h3>
+                            <div class="metric-value" id="arimaScore">-</div>
+                            <div class="metric-label">Years Won</div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card prophet" id="prophetScoreCard">
+                        <div class="metric-icon"></div>
+                        <div class="metric-content">
+                            <h3>Prophet</h3>
+                            <div class="metric-value" id="prophetScore">-</div>
+                            <div class="metric-label">Years Won</div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card wins" id="overallWinnerCard">
+                        <div class="metric-icon"></div>
+                        <div class="metric-content">
+                            <h3>Best Model</h3>
+                            <div class="metric-value" id="overallWinner">-</div>
+                            <div class="metric-label" id="overallWinnerPercentage">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Year by Year Winner -->
+                <div class="table-card" id="yearWinnerTable" style="display: none; margin-top: 2rem;">
+                    <div class="table-header">
+                        <h3>Year-by-Year Winner</h3>
+                        <p>Model with lowest error per year</p>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table" id="forecastWinnerTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Year</th>
+                                    <th>Actual GDP (B USD)</th>
+                                    <th>ARIMA Error (B)</th>
+                                    <th>Prophet Error (B)</th>
+                                    <th>Winner</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Loading -->
+                <div id="forecastLoading" class="loading" style="display: none;">
+                    Loading forecast data...
+                </div>
+
+                <!-- Error Message -->
+                <div id="forecastError" style="display: none; background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow-md); text-align: center; color: var(--primary);">
+                    <p>Forecast data is not available for this country.</p>
+                </div>
+            </section>
+
+            <!-- Insights Section -->
+            <section id="insights-section" class="section">
+                <div class="section-header">
+                    <h2>Insights & Key Findings</h2>
+                    <p>Conclusions and recommendations from the research</p>
+                </div>
+
+                <div class="insights-grid">
+                    <div class="insight-card highlight">
+                        <div class="insight-icon"></div>
+                        <h3>Key Findings</h3>
+                        <ul class="insight-list">
+                            <li><strong>Prophet excels globally</strong> with MAE ~76.0 billion USD vs ARIMA ~101.4 billion USD</li>
+                            <li><strong>Prophet wins in 72 countries</strong> (61.5%), ARIMA in 45 countries (38.5%)</li>
+                            <li><strong>Prophet has lower MAPE</strong> (11.4%) compared to ARIMA (13.6%)</li>
+                        </ul>
+                    </div>
+
+                        <div class="insight-card success">
+                        <div class="insight-icon"></div>
+                        <h3>Prophet Excels In</h3>
+                        <ul class="insight-list">
+                            <li><strong>Non-linear growth economies</strong> like China, India, Indonesia</li>
+                            <li><strong>Countries with post-pandemic trends</strong> with sharp recovery</li>
+                            <li><strong>Rapidly developing economies</strong> with significant changepoints</li>
+                            <li><strong>Asia</strong>: Prophet 108.2B vs ARIMA 192.1B (44% improvement)</li>
+                        </ul>
+                    </div>
+
+                    <div class="insight-card warning">
+                        <div class="insight-icon"></div>
+                        <h3>ARIMA Better For</h3>
+                        <ul class="insight-list">
+                            <li><strong>Stable economies</strong> like United States, Brazil, Japan</li>
+                            <li><strong>Data with high volatility</strong> but strong short-term patterns</li>
+                            <li><strong>Small datasets</strong> with low noise</li>
+                            <li><strong>North America</strong>: Competitive performance on large economies</li>
+                        </ul>
+                    </div>
+
+                    <div class="insight-card info">
+                        <div class="insight-icon"></div>
+                        <h3>By Continent (Average RMSE)</h3>
+                        <ul class="insight-list">
+                            <li><strong>Africa</strong>: ARIMA 26.3B vs Prophet 22.5B</li>
+                            <li><strong>Asia</strong>: ARIMA 200B vs Prophet 112B</li>
+                            <li><strong>Europe</strong>: ARIMA 55.3B vs Prophet 39.9B</li>
+                            <li><strong>North America</strong>: Competitive, scale dependent</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="recommendations-card">
+                    <h3>Recommendations</h3>
+                    <div class="recommendations-grid">
+                        <div class="recommendation-item">
+                            <div class="recommendation-number">1</div>
+                            <div class="recommendation-content">
+                                <h4>Production Strategy</h4>
+                                <p>Use <strong>Prophet as the baseline</strong> for global forecasting, with hierarchical models per region to adjust for scale</p>
+                            </div>
+                        </div>
+                        <div class="recommendation-item">
+                            <div class="recommendation-number">2</div>
+                            <div class="recommendation-content">
+                                <h4>Using ARIMA</h4>
+                                <p>Maintain <strong>ARIMA for countries with stable data</strong>. Consider integrating exogenous variables (VAR/ARIMAX) for volatile countries</p>
+                            </div>
+                        </div>
+                        <div class="recommendation-item">
+                            <div class="recommendation-number">3</div>
+                            <div class="recommendation-content">
+                                <h4>Further Evaluation</h4>
+                                <p>Implement <strong>rolling origin validation</strong> and explore boosting (XGBoost, LSTM) for multi-year horizons</p>
+                            </div>
+                        </div>
+                        <div class="recommendation-item">
+                            <div class="recommendation-number">4</div>
+                            <div class="recommendation-content">
+                                <h4>Data Normalization</h4>
+                                <p>Transform GDP to <strong>log or growth rate</strong> to stabilize variance before advanced modeling</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Methodology -->
+                <div class="methodology-card">
+                    <h3>Methodology</h3>
+                    <div class="methodology-content">
+                        <div class="methodology-section">
+                            <h4>Dataset</h4>
+                            <p>Annual GDP data 2000-2025 from World Bank for 117 countries (after filtering < 15 observations)</p>
+                        </div>
+                        <div class="methodology-section">
+                            <h4>Data Split</h4>
+                            <p>Training: 2000-2021 | Testing: 2022-2025 (4 years horizon)</p>
+                        </div>
+                        <div class="methodology-section">
+                            <h4>ARIMA Model</h4>
+                            <p>Grid search SARIMAX with orders (p,d,q) from 0-2, without seasonal component. Selection based on AIC</p>
+                        </div>
+                        <div class="methodology-section">
+                            <h4>Prophet Model</h4>
+                            <p>Prophet with multiplicative seasonality mode, yearly frequency, without weekly/daily seasonality</p>
+                        </div>
+                        <div class="methodology-section">
+                            <h4>Evaluation Metrics</h4>
+                            <p>MAE (Mean Absolute Error), RMSE (Root Mean Square Error), MAPE (Mean Absolute Percentage Error)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Limitations -->
+                <div class="limitations-card">
+                    <h3>Research Limitations</h3>
+                    <ul class="limitations-list">
+                        <li>Short test horizon (2022-2025) with high sensitivity to COVID-19 shock</li>
+                        <li>No inflation or PPP adjustment - nominal GDP values may be biased across countries</li>
+                        <li>Prophet requires high runtime for 100+ countries - parallel optimization recommended</li>
+                        <li>Does not include external variables (commodity prices, trade, policy) that affect GDP</li>
+                        <li>Baseline models without extensive hyperparameter tuning</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about-section" class="section">
+                <div class="section-header">
+                    <h2>About the Project</h2>
+                    <p>Meet the creator behind Phetrima</p>
+                </div>
+
+                <!-- About Card -->
+                <div class="content-section">
+                    <div class="about-container">
+                        <div class="about-profile">
+                            <div class="profile-header">
+                                <div class="profile-photo-container">
+                                    <img src="{{ url_for('static', filename='img/profile-photo.jpg') }}" alt="Lyon Ambrosio Djuanda" class="profile-photo">
+                                </div>
+                                <div class="profile-info">
+                                    <h2>Lyon Ambrosio Djuanda</h2>
+                                    <p class="profile-title">Data Scientist & Full Stack Developer</p>
+                                    <p class="profile-subtitle">Undergraduate Informatics Engineering Student</p>
+                                    <p class="profile-university">Universitas Negeri Semarang</p>
+                                </div>
+                            </div>
+
+                            <div class="profile-content">
+                                <div class="profile-section">
+                                    <h3>About Me</h3>
+                                    <p>I am a Computer Science Student at Universitas Negeri Semarang, actively building a strong foundation in key technical disciplines.</p>
+                                    <p>My core technical interests lie in <strong>Data Science</strong>, <strong>Deep Learning</strong>, <strong>Game Development</strong>, and <strong>Website Development</strong>.</p>
+                                </div>
+
+                                <div class="profile-section">
+                                    <h3>My Approach</h3>
+                                    <p>I possess a strong sense of responsibility and a diligent work ethic, ensuring I dedicate the time needed to complete complex tasks thoroughly and produce high-quality results.</p>
+                                    <p>I am strongly committed to continuous growth and self-improvement, proactively seeking opportunities to learn new skills and deepen my expertise.</p>
+                                    <p>I recognize the importance of attitude and strive to maintain a humble and open-minded approach in all professional interactions.</p>
+                                </div>
+
+                                <div class="profile-section">
+                                    <h3>About This Project</h3>
+                                    <p>What inspired me to create this project was my <strong>curiosity</strong> about how current AI forecasting models could predict economic conditions based on historical data. In my exploration, I discovered two powerful time series forecasting algorithms: <strong>ARIMA</strong> (AutoRegressive Integrated Moving Average) and <strong>Prophet</strong> (developed by Meta).</p>
+                                    <p>I wanted to compare these models in real-world cases, which led to the creation of this project—<strong>"Phetrima"</strong> (Prophet + ARIMA). Through comprehensive analysis and comparison across 117 countries with 25 years of GDP data, I found that the Prophet model made by Meta is indeed better than ARIMA for time forecasting based on historical data.</p>
+                                    <p>This project demonstrates the practical application of data science and machine learning in economic forecasting, showcasing how different algorithms perform when faced with real-world complexity and uncertainty.</p>
+                                </div>
+
+                                <div class="profile-section">
+                                    <h3>Additional Skills</h3>
+                                    <p>I also have foundational skills in <strong>Photography</strong> and <strong>Videography</strong>, which complement my technical skills by informing my design sense and media presentation.</p>
+                                </div>
+
+                                <div class="profile-quote">
+                                    <blockquote>
+                                        "The only thing you sometimes have control over is perspective. You don't have control over your situation. But you have a choice about how you view it."
+                                        <footer>— Chris Pine</footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Section -->
+                        <div class="contact-section">
+                            <h3>Connect With Me</h3>
+                            <div class="contact-grid">
+                                <a href="https://lyon.vercel.app/" target="_blank" class="contact-card">
+                                    <div class="contact-icon"><i class="fa-solid fa-globe"></i></div>
+                                    <div class="contact-info">
+                                        <h4>Portfolio</h4>
+                                        <p>visit my website</p>
+                                    </div>
+                                </a>
+                                
+                                <a href="mailto:lyon.ambrosio.djuanda@gmail.com" class="contact-card">
+                                    <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                                    <div class="contact-info">
+                                        <h4>Email</h4>
+                                        <p>lyon.ambrosio.djuanda@gmail.com</p>
+                                    </div>
+                                </a>
+                                
+                                <a href="https://www.linkedin.com/in/lyon-ambrosio-djuanda/" target="_blank" class="contact-card">
+                                    <div class="contact-icon"><i class="fa-brands fa-linkedin"></i></div>
+                                    <div class="contact-info">
+                                        <h4>LinkedIn</h4>
+                                        <p>professional profile</p>
+                                    </div>
+                                </a>
+                                
+                                <a href="https://www.instagram.com/lyon_a.d/" target="_blank" class="contact-card">
+                                    <div class="contact-icon"><i class="fa-brands fa-instagram"></i></div>
+                                    <div class="contact-info">
+                                        <h4>Instagram</h4>
+                                        <p>@lyon_a.d</p>
+                                    </div>
+                                </a>
+                                
+                                <a href="https://www.youtube.com/@lyon_a.d" target="_blank" class="contact-card">
+                                    <div class="contact-icon"><i class="fa-brands fa-youtube"></i></div>
+                                    <div class="contact-info">
+                                        <h4>YouTube</h4>
+                                        <p>technical content</p>
+                                    </div>
+                                </a>
+                                
+                                <a href="https://www.tiktok.com/@lyon.create" target="_blank" class="contact-card">
+                                    <div class="contact-icon"><i class="fa-brands fa-tiktok"></i></div>
+                                    <div class="contact-info">
+                                        <h4>TikTok</h4>
+                                        <p>@lyon.create</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h4>Phetrima</h4>
+                    <p>Prophet + ARIMA Forecasting Platform for World GDP Analysis</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Data Sources</h4>
+                    <ul>
+                        <li><a href="https://www.kaggle.com/datasets/naveenapaleti/world-bank-gdp-by-country-and-continent20002025" target="_blank">Kaggle: World Bank GDP Dataset</a></li>
+                        <li><a href="http://facebook.github.io/prophet/docs/quick_start.html" target="_blank">Prophet: Quick Start Guide</a></li>
+                        <li><a href="https://www.geeksforgeeks.org/machine-learning/python-arima-model-for-time-series-forecasting/" target="_blank">GeeksforGeeks: ARIMA Tutorial</a></li>
+                    </ul>
+                </div>
+                <div class="footer-stats">
+                    <div class="footer-stat">
+                        <strong>117</strong>
+                        <span>Countries</span>
+                    </div>
+                    <div class="footer-stat">
+                        <strong>25</strong>
+                        <span>Years Data</span>
+                    </div>
+                    <div class="footer-stat">
+                        <strong>2</strong>
+                        <span>Models</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Phetrima Project by Lyon Ambrosio Djuanda. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
