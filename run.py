@@ -14,7 +14,7 @@ if __name__ == '__main__':
     print(f"Environment: {env}")
     print(f"Debug mode: {debug}")
     print(f"Port: {port}")
-    print(f"\n🚀 Open your browser and visit: http://localhost:{port}")
+    print(f"\nOpen your browser and visit: http://localhost:{port}")
     print(f"\nPress CTRL+C to quit\n")
     
     app.run(

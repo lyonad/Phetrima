@@ -43,9 +43,9 @@ This research evaluates the predictive capabilities of ARIMA models (grid search
 
 | Metric | ARIMA | Prophet | Winner |
 |--------|-------|---------|--------|
-| **MAE** | 101.4 B USD | 76.0 B USD | ✅ Prophet |
-| **RMSE** | 106.8 B USD | 80.6 B USD | ✅ Prophet |
-| **MAPE** | 13.6% | 11.4% | ✅ Prophet |
+| **MAE** | 101.4 B USD | 76.0 B USD | Prophet |
+| **RMSE** | 106.8 B USD | 80.6 B USD | Prophet |
+| **MAPE** | 13.6% | 11.4% | Prophet |
 
 ### Model Wins Distribution
 - **Prophet**: 72 countries (61.5%)
@@ -55,12 +55,12 @@ This research evaluates the predictive capabilities of ARIMA models (grid search
 
 | Continent | ARIMA (B USD) | Prophet (B USD) | Winner |
 |-----------|---------------|-----------------|--------|
-| **Africa** | 26.3 | 22.5 | ✅ Prophet |
-| **Asia** | 200.0 | 112.0 | ✅ Prophet |
-| **Europe** | 55.3 | 39.9 | ✅ Prophet |
-| **North America** | 597.7 | 818.6 | ✅ ARIMA |
-| **South America** | 60.4 | 44.9 | ✅ Prophet |
-| **Australia/Oceania** | 12.0 | 3.2 | ✅ Prophet |
+| **Africa** | 26.3 | 22.5 | Prophet |
+| **Asia** | 200.0 | 112.0 | Prophet |
+| **Europe** | 55.3 | 39.9 | Prophet |
+| **North America** | 597.7 | 818.6 | ARIMA |
+| **South America** | 60.4 | 44.9 | Prophet |
+| **Australia/Oceania** | 12.0 | 3.2 | Prophet |
 
 ### Key Insights
 
@@ -184,4 +184,4 @@ ARIMA remains competitive for:
 **Countries Analyzed**: 117  
 **Training Period**: 2000-2021 (22 years)  
 **Test Period**: 2022-2025 (4 years)  
-**Status**: Production Ready ✅
+**Status**: Production Ready

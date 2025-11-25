@@ -1,4 +1,4 @@
-# 🌍 Phetrima - GDP Forecasting with Prophet & ARIMA
+# Phetrima - GDP Forecasting with Prophet & ARIMA
 
 <div align="center">
 
@@ -15,22 +15,22 @@
 
 ---
 
-## 📊 Overview
+## Overview
 
 Phetrima (Prophet + ARIMA) is a comprehensive forecasting research platform that evaluates two powerful time series models: **Prophet** and **ARIMA** for predicting GDP across **117 countries** over **25 years** (2000-2025).
 
-### 🎯 Key Results
+### Key Results
 
 | Metric | Prophet | ARIMA | Winner |
 |--------|---------|-------|--------|
-| **MAE** | 76.0B USD | 101.4B USD | ✅ Prophet |
-| **RMSE** | 80.6B USD | 106.8B USD | ✅ Prophet |
-| **MAPE** | 11.4% | 13.6% | ✅ Prophet |
-| **Countries Won** | 72 (61.5%) | 45 (38.5%) | ✅ Prophet |
+| **MAE** | 76.0B USD | 101.4B USD | Prophet |
+| **RMSE** | 80.6B USD | 106.8B USD | Prophet |
+| **MAPE** | 11.4% | 13.6% | Prophet |
+| **Countries Won** | 72 (61.5%) | 45 (38.5%) | Prophet |
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Cara Termudah (Windows)
 
@@ -58,50 +58,50 @@ Kemudian buka browser: **http://localhost:5000**
 
 ---
 
-## ✨ Fitur Utama
+## Fitur Utama
 
-### 📈 Overview Dashboard
-- ✅ Metrik global ARIMA vs Prophet (MAE, RMSE, MAPE)
-- ✅ Distribusi kemenangan model (chart donut)
-- ✅ Top 10 peningkatan terbesar menggunakan Prophet
-- ✅ Top 10 ekonomi dunia berdasarkan GDP
-- ✅ Visualisasi bar chart perbandingan metrik global
+### Overview Dashboard
+- Metrik global ARIMA vs Prophet (MAE, RMSE, MAPE)
+- Distribusi kemenangan model (chart donut)
+- Top 10 peningkatan terbesar menggunakan Prophet
+- Top 10 ekonomi dunia berdasarkan GDP
+- Visualisasi bar chart perbandingan metrik global
 
-### 🌍 Analisis Per Negara
-- ✅ Tabel interaktif dengan 118 negara
-- ✅ Filter by benua & model pemenang
-- ✅ Real-time search berdasarkan nama negara
-- ✅ Sortable columns untuk semua metrik
-- ✅ Export ke CSV functionality
-- ✅ Indikator visual model terbaik per negara
+### Analisis Per Negara
+- Tabel interaktif dengan 118 negara
+- Filter by benua & model pemenang
+- Real-time search berdasarkan nama negara
+- Sortable columns untuk semua metrik
+- Export ke CSV functionality
+- Indikator visual model terbaik per negara
 
-### 🌐 Analisis Per Benua
-- ✅ Chart perbandingan RMSE per benua
-- ✅ Statistics cards per benua (wins, MAPE average)
-- ✅ Detailed metrics table dengan semua metrik
-- ✅ Identifikasi regional pattern
+### Analisis Per Benua
+- Chart perbandingan RMSE per benua
+- Statistics cards per benua (wins, MAPE average)
+- Detailed metrics table dengan semua metrik
+- Identifikasi regional pattern
 
-### 📉 Forecast Detail
-- ✅ Time series GDP visualization
-- ✅ Historical vs Forecast comparison
-- ✅ Perbandingan ARIMA vs Prophet per tahun
-- ✅ Winner per tahun forecast (2022-2025)
-- ✅ Summary card menampilkan model terbaik overall
+### Forecast Detail
+- Time series GDP visualization
+- Historical vs Forecast comparison
+- Perbandingan ARIMA vs Prophet per tahun
+- Winner per tahun forecast (2022-2025)
+- Summary card menampilkan model terbaik overall
 
-### 💡 Insights & Rekomendasi
-- ✅ Temuan utama penelitian
-- ✅ Kapan Prophet/ARIMA unggul
-- ✅ 4 rekomendasi strategis
-- ✅ Metodologi & keterbatasan penelitian
+### Insights & Rekomendasi
+- Temuan utama penelitian
+- Kapan Prophet/ARIMA unggul
+- 4 rekomendasi strategis
+- Metodologi & keterbatasan penelitian
 
 ---
 
-## 🏗️ Struktur Proyek
+## Struktur Proyek
 
 ```
 World-GDP-Project/
 │
-├── 🚀 Application Files
+├── Application Files
 │   ├── app.py              # Flask backend dengan 9 API endpoints
 │   ├── config.py           # Configuration settings
 │   ├── run.py              # Enhanced runner script
@@ -113,7 +113,7 @@ World-GDP-Project/
 │       ├── css/style.css   # Modern styling & responsive design
 │       └── js/app.js       # Frontend logic & Chart.js integration
 │
-├── 📊 Data & Reports
+├── Data & Reports
 │   ├── Data/
 │   │   └── gdp_2000_2025.csv              # Dataset utama dari World Bank
 │   │
@@ -127,7 +127,7 @@ World-GDP-Project/
 │   └── figures/
 │       ├── forecast_comparison_*.png      # Forecast visualizations
 │
-├── 🐳 Deployment
+├── Deployment
 │   ├── Dockerfile          # Docker configuration
 │   ├── docker-compose.yml  # Docker Compose setup
 │   ├── Procfile            # Heroku deployment
@@ -169,7 +169,7 @@ World-GDP-Project/
 
 ---
 
-## 🌐 API Endpoints
+## API Endpoints
 
 ### Global Metrics
 ```bash
@@ -233,7 +233,7 @@ GET /api/forecast-detail/<country>
 
 ---
 
-## 🔬 Metodologi Penelitian
+## Metodologi Penelitian
 
 ### Dataset
 - **Source**: World Bank Open Data
@@ -264,21 +264,21 @@ GET /api/forecast-detail/<country>
 
 ---
 
-## 💡 Key Insights
+## Key Insights
 
-### 🟢 Prophet Unggul Pada:
+### Prophet Unggul Pada:
 - Ekonomi dengan pertumbuhan nonlinear (China, India, Indonesia)
 - Tren pasca-pandemi yang tajam
 - Asia region (54% improvement)
 - Negara berkembang dengan changepoints signifikan
 
-### 🔵 ARIMA Lebih Baik Pada:
+### ARIMA Lebih Baik Pada:
 - Ekonomi stabil dan mature (USA, Japan, France)
 - Volatilitas tinggi dengan pola konsisten
 - Dataset kecil dengan noise rendah
 - Ekonomi dengan fluktuasi cyclical
 
-### 📊 Per Benua:
+### Per Benua:
 - **Asia**: Prophet dominan (MAE: 92.1B vs ARIMA: 192.1B)
 - **Africa**: Prophet lebih baik (MAE: 20.3B vs ARIMA: 26.3B)
 - **Europe**: Prophet menang tipis (MAE: 39.6B vs ARIMA: 54.1B)
@@ -286,7 +286,7 @@ GET /api/forecast-detail/<country>
 
 ---
 
-## 🐳 Docker Deployment
+## Docker Deployment
 
 ### Build & Run
 
@@ -358,7 +358,7 @@ railway up
 
 ---
 
-## 🎯 Use Cases
+## Use Cases
 
 ### 🎓 Academic Research
 - Penelitian ekonomi dan forecasting
@@ -430,7 +430,7 @@ bandit -r .
 
 ---
 
-## 📈 Performance
+## Performance
 
 - **Initial Load**: < 2 seconds
 - **API Response**: < 100ms per endpoint
@@ -569,15 +569,15 @@ Full list: 43 packages in `requirements.txt`
 
 ---
 
-## 📊 Statistics
+## Statistics
 
-- 🌍 **118 Countries** analyzed
-- 📅 **25 Years** of data (2000-2025)
-- 📈 **2 Models** compared (ARIMA vs Prophet)
-- 🎯 **3 Metrics** evaluated (MAE, RMSE, MAPE)
-- 💻 **10 API Endpoints** available
-- 📱 **100% Responsive** design
-- 🚀 **Production Ready**
+- **118 Countries** analyzed
+- **25 Years** of data (2000-2025)
+- **2 Models** compared (ARIMA vs Prophet)
+- **3 Metrics** evaluated (MAE, RMSE, MAPE)
+- **10 API Endpoints** available
+- **100% Responsive** design
+- **Production Ready**
 
 ---
 
@@ -599,7 +599,7 @@ Full list: 43 packages in `requirements.txt`
 
 <div align="center">
 
-### 🚀 Ready to Explore?
+### Ready to Explore?
 
 ```bash
 python app.py
@@ -617,4 +617,4 @@ Open **http://localhost:5000** in your browser!
 
 ---
 
-*Last Updated: January 2025 | Version 1.0.0 | Status: Production Ready ✅*
+*Last Updated: January 2025 | Version 1.0.0 | Status: Production Ready*
